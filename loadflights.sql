@@ -156,37 +156,43 @@ UPDATE planes SET engine = SUBSTRING(engine, 1, CHAR_LENGTH(engine)-1);
 
 -- How many airplanes have listed speeds, what are the minimum and maximum speeds?
 
--- select * from planes
--- where speed is not Null
--- order by speed desc;
+-- How many - 23
+-- Min - 90
+-- Max 432
+
+select * from planes
+where speed is not Null
+order by speed desc;
 
 -- Total distances flown january 2013 with and without tailnums.
 
--- select sum(distance) from flights
--- where year = '2013' and month = '1';
+-- Distance - 27188805
+select sum(distance) from flights
+where year = '2013' and month = '1';
 
--- select sum(distance) from flights
--- where year = '2013' and month = '1' and tailnum is null;
+-- Distance without tailnum - None
+select sum(distance) from flights
+where year = '2013' and month = '1' and tailnum is null;
 
--- Distances flown by manufacturer with inner and outer join statements.
+-- Distances flown by manufacturer with inner and outer join statements
 
--- select planes.manufacturer, sum(flights.distance)
--- from planes
--- inner join flights
--- on planes.tailnum = flights.tailnum
--- where flights.year = '2013'
---  and flights.month = '7'
---  and flights.day = '5'
--- group by manufacturer;
+select planes.manufacturer, sum(flights.distance)
+from planes
+inner join flights
+on planes.tailnum = flights.tailnum
+where flights.year = '2013'
+ and flights.month = '7'
+ and flights.day = '5'
+group by manufacturer;
 
--- select planes.manufacturer, sum(flights.distance)
--- from planes
--- left outer join flights
--- on planes.tailnum = flights.tailnum
--- where flights.year = '2013'
---   and flights.month = '7'
---   and flights.day = '5'
--- group by manufacturer;
+select planes.manufacturer, sum(flights.distance)
+from planes
+left outer join flights
+on planes.tailnum = flights.tailnum
+where flights.year = '2013'
+  and flights.month = '7'
+  and flights.day = '5'
+group by manufacturer;
 
 -- Which airline had the most boeing flights on 2013/04/20?
 
